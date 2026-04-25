@@ -1,49 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Шрифт Sentient заменен на PT Serif с поддержкой кириллицы */
-
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 196 100% 18%;
 
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 196 100% 18%;
 
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 196 100% 18%;
 
-    --primary: 48 100% 50%;
+    --primary: 181 100% 41%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 200 30% 77%;
+    --secondary-foreground: 196 100% 18%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 0 0% 15%;
+    --accent: 180 100% 25%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 26%;
-    --input: 0 0% 26%;
-    --ring: 48 100% 50%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 181 100% 41%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 5%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 48 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 48 100% 50%;
+    /* Brand */
+    --teal: #008080;
+    --cyan: #00ced1;
+    --blue-soft: #7bb4c6;
+    --dark-blue: #00485b;
+    --bg-soft: #f5f5f5;
+    --bg-cream: #fffdf9;
   }
 }
 
@@ -53,13 +52,23 @@
   }
 
   body {
-    @apply text-foreground;
-    font-family: Arial, Helvetica, sans-serif;
-    background: transparent;
+    @apply text-foreground bg-white;
+    font-family: "Montserrat", sans-serif;
   }
 
   html {
-    @apply bg-background;
+    @apply bg-white;
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: var(--dark-blue);
   }
 }
 
@@ -67,6 +76,7 @@
   .container {
     margin-inline: auto;
     padding-inline: 1rem;
+    max-width: 1280px;
   }
 
   @media (min-width: 768px) {
@@ -81,34 +91,85 @@
     }
   }
 
-  .font-sentient {
-    font-family: 'PT Serif', serif;
+  .text-dark-blue {
+    color: var(--dark-blue);
+  }
+  .text-teal {
+    color: var(--teal);
+  }
+  .text-cyan {
+    color: var(--cyan);
+  }
+  .text-blue-soft {
+    color: var(--blue-soft);
   }
 
-  .shadow-glow {
-    box-shadow: 0 0 8px 2px var(--tw-shadow-color);
+  .bg-teal {
+    background-color: var(--teal);
   }
-}
+  .bg-cyan {
+    background-color: var(--cyan);
+  }
+  .bg-soft {
+    background-color: var(--bg-soft);
+  }
+  .bg-cream {
+    background-color: var(--bg-cream);
+  }
 
-#webgl {
-  top: 0;
-  left: 0;
-  position: fixed;
-  height: 100svh;
-  width: 100%;
-  z-index: 0;
-}
+  .btn-primary {
+    background-color: var(--cyan);
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    transition:
+      background-color 0.2s,
+      box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover {
+    background-color: var(--teal);
+    box-shadow: 0 4px 18px rgba(0, 206, 209, 0.3);
+  }
 
-#webgl canvas {
-  width: 100%;
-  height: 100%;
-}
+  .btn-outline {
+    border: 2px solid var(--teal);
+    color: var(--teal);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    background: white;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-outline:hover {
+    background-color: var(--teal);
+    color: white;
+  }
 
-/* Vignette effect overlay */
-#webgl::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+  .card-shadow {
+    box-shadow: 0 4px 24px rgba(0, 72, 91, 0.08);
+  }
+
+  .section-label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .gradient-teal {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--cyan) 100%);
+  }
 }

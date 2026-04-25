@@ -1,37 +1,83 @@
 import { Logo } from "./Logo";
-import { MobileMenu } from "./MobileMenu";
+import { useState } from "react";
+import Icon from "@/components/ui/icon";
+
+const navItems = [
+  { label: "Платформа", href: "#platform" },
+  { label: "Решения", href: "#solutions" },
+  { label: "Интеграции", href: "#integrations" },
+  { label: "Кейсы", href: "#cases" },
+  { label: "Тарифы", href: "#pricing" },
+  { label: "О компании", href: "#about" },
+  { label: "База знаний", href: "#knowledge" },
+];
 
 export const Header = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <div className="fixed z-50 pt-8 md:pt-14 top-0 left-0 w-full">
-      <header className="flex items-center justify-between container">
+    <header
+      className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm"
+      style={{ boxShadow: "0 1px 12px rgba(0,72,91,0.07)", borderBottom: "1px solid #f0f0f0" }}
+    >
+      <div className="container flex items-center justify-between h-16">
         <a href="/">
-          <Logo className="w-[100px] md:w-[120px]" />
+          <Logo />
         </a>
-        <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
-          {[
-            { label: "О нас", href: "#about" },
-            { label: "Портфолио", href: "#portfolio" },
-            { label: "Инсайты", href: "#insights" },
-            { label: "Контакты", href: "#contact" },
-          ].map((item) => (
+
+        <nav className="hidden lg:flex items-center gap-x-6">
+          {navItems.map((item) => (
             <a
-              className="uppercase inline-block font-mono text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
-              href={item.href}
               key={item.label}
+              href={item.href}
+              className="text-sm font-medium transition-colors duration-150 hover:text-teal"
+              style={{ color: "#555", fontFamily: "Montserrat, sans-serif" }}
             >
               {item.label}
             </a>
           ))}
         </nav>
-        <a
-          className="uppercase max-lg:hidden transition-colors ease-out duration-150 font-mono text-primary hover:text-primary/80"
-          href="#sign-in"
+
+        <div className="hidden lg:flex items-center gap-3">
+          <a href="#login" className="btn-outline text-sm" style={{ padding: "0.45rem 1.1rem" }}>
+            Войти
+          </a>
+          <a href="#demo" className="btn-primary text-sm" style={{ padding: "0.45rem 1.1rem" }}>
+            Запросить демо
+          </a>
+        </div>
+
+        <button
+          className="lg:hidden p-2"
+          style={{ color: "var(--dark-blue)" }}
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Меню"
         >
-          Войти
-        </a>
-        <MobileMenu />
-      </header>
-    </div>
+          <Icon name={mobileOpen ? "X" : "Menu"} size={24} />
+        </button>
+      </div>
+
+      {mobileOpen && (
+        <div className="lg:hidden bg-white px-4 pb-6 pt-2" style={{ borderTop: "1px solid #f0f0f0" }}>
+          <nav className="flex flex-col gap-4 mb-5">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="text-base font-medium"
+                style={{ color: "#444", fontFamily: "Montserrat, sans-serif" }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex flex-col gap-3">
+            <a href="#login" className="btn-outline text-center justify-center">Войти</a>
+            <a href="#demo" className="btn-primary justify-center">Запросить демо</a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
